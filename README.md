@@ -7,7 +7,12 @@ Examples for integrating NiFi and Impala
 
 ## Starting the Cloudera QuickStart VM
 - Please use the "Getting Started" docker documentation at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/quickstart_docker_container.html
-- Example to start the QuickStart container: `docker run --hostname=quickstart.cloudera --name=quickstart.cloudera --privileged=true -t -i -d -p 8888:8888 -p 7180:7180 -p 21000:21000 -p 21050:21050 2701f6c9ad88 /usr/bin/docker-quickstart`
+- Documentation for administering the cluster, including usernames and passwords: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/quickstart_vm_administrative_information.html
+- Example to start the QuickStart container
+  - `docker run --hostname=quickstart.cloudera --name=quickstart.cloudera --privileged=true -t -i -d -2701f6c9ad88 /usr/bin/docker-quickstart`
+- Start Cloudera Manager.  Depending on your host, it may take a while to start.
+  - `docker exec quickstart.cloudera /home/cloudera/cloudera-manager --express`
+- Make sure an entry for `quickstart.cloudera` is in `/etc/hosts` that resolves to the QuickStart container
 - Watch the containers logs: `docker logs quickstart.cloudera`
 
 ## Download the Impala JDBC driver

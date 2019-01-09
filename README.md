@@ -39,5 +39,10 @@ Import `nifi-impala-template` into NiFi, which will create a process group calle
 1. Go into the `NiFi Impala Integration` process group
 1. Right click on the canvas, and update the `hadoop-conf` variable with the path to the directory containing the HDFS client configs.
 
+## Troubleshooting
+### Host Health issues
+  - `ntp` may not be started, or may not be set to start at boot.
+    - `service ntpd restart`
+
 ## TODO
 - Provide examples that integrate with a kerberized Impala

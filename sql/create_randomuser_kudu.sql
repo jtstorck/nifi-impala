@@ -1,4 +1,11 @@
-CREATE TABLE IF NOT EXISTS randomuser_csv(
+CREATE TABLE IF NOT EXISTS randomuser_kudu(
+        login_uuid string,
+        login_username string,
+        login_password string,
+        login_salt string,
+        login_md5 string,
+        login_sha1 string,
+        login_sha256 string,
         gender string,
         name_title string,
         name_first string,
@@ -12,13 +19,6 @@ CREATE TABLE IF NOT EXISTS randomuser_csv(
         location_timezone_offset string,
         location_timezone_description string,
         email string,
-        login_uuid string,
-        login_username string,
-        login_password string,
-        login_salt string,
-        login_md5 string,
-        login_sha1 string,
-        login_sha256 string,
         dob_date string,
         dob_age string,
         registered_date string,
@@ -30,6 +30,10 @@ CREATE TABLE IF NOT EXISTS randomuser_csv(
         picture_large string,
         picture_medium string,
         picture_thumbnail string,
-        nat string)
-    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
-    LOCATION '/tmp/randomuser'
+        nat string,
+        PRIMARY KEY (login_uuid))
+    STORED AS KUDU
+    TBLPROPERTIES (
+      'kudu.master_addresses' = 'quickstart.cloudera:7051',
+      'kudu.num_tablet_replicas' = '1'
+    )

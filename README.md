@@ -29,7 +29,8 @@ Examples for integrating NiFi and Impala
 1. Restart NiFi.
 
 ## Example Flow
-Import template `nifi-impala-integration.xml` into NiFi, which will create a process group called `NiFi Impala Integration`.  Within that process groups are several process groups that demonstrate various examples of retrieving data from external sources and creating tables in Impala to make that data queryable.
+Import template `nifi-impala-integration.xml` into NiFi, which will create a process group called `NiFi Impala Integration`.  Within that process group are several process groups that demonstrate various examples of retrieving data from external sources and creating tables in Impala to make that data queryable.
+- Enable all controller services from the `NiFi Impala Integration` process group's `Configuration`, under `Controller Services`.
 
 ## Download the HDFS client configs
 1. Go to: http://quickstart.cloudera:7180/cmf/home
@@ -43,6 +44,13 @@ Import template `nifi-impala-integration.xml` into NiFi, which will create a pro
 ### Host Health issues
   - `ntp` may not be started, or may not be set to start at boot.
     - `service ntpd restart`
+### Docker For Mac
+  - Several ports should be added to the `docker run` command when starting the QuickStart container.  More information about ports used by Cloudera QuickStart can be found at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/cm_ig_ports.html
+    - `-p 7051:7051` (Kudu Master)
+    - `-p 7180:7180` (Cloudera Manager UI)
+    - `-p 21050:21050` (Impala Daemon Frontend)
+    - `-p 50070:50070` (HDFS HTTP NameNode)
+    - TBD
 
 ## TODO
 - Provide examples that integrate with a kerberized Impala

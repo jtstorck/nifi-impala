@@ -43,7 +43,7 @@ Import template `nifi-impala-integration.xml` into NiFi, which will create a pro
 ## Troubleshooting
 ### Host Health issues
   - `ntp` may not be started, or may not be set to start at boot.
-    - `service ntpd restart`
+    - `docker exec quickstart.cloudera service ntpd restart`
 ### Docker For Mac
   - Several ports should be added to the `docker run` command when starting the QuickStart container.  More information about ports used by Cloudera QuickStart can be found at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/cm_ig_ports.html
     - `-p 7051:7051` (Kudu Master)

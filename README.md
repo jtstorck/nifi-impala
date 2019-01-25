@@ -43,6 +43,30 @@ Import template `nifi-impala-integration.xml` into NiFi, which will create a pro
 1. Go into the `NiFi Impala Integration` process group.
 1. Right click on the canvas, and update the `hadoop-conf` variable with the path to the directory containing the HDFS client configs.
 
+## Enabling Kerberos on the QuickStart VM
+A blog detailing the setup is available at: https://blog.cloudera.com/blog/2015/03/how-to-quickly-configure-kerberos-for-your-apache-hadoop-cluster/
+In summary, these instructions can be followed to enable Kerberos on the QuickStart VM:
+1. Make sure that Cloudera Manager is running
+1. As root, on the QuickStart VM container, run the following script: https://github.com/git4impatient/quickKerberos/blob/master/goKerberos_beforeCM.sh
+1. Log into Cloudera Manager
+1. Click on `Administration` -> `Security` -> `Enable Kerberos`
+1. Check the four boxes on the first page of the wizard, then click `Continue`
+1. On the next page, supply the following values, then click `Continue`
+  - Kerberos Security Realm: `CLOUDERA`
+  - KDC Server Host: `quickstart.cloudera`
+  - Kerberos Encryption Types: `aes256-cts-hmac-sha1-96`
+1. On the next page, check the box for `Manage krb5.conf through Cloudera Manager`, then click `Continue`
+1. On the next page, `KDC Account Manager Credentials`, enter `cloudera-scm/admin@CLOUDERA` for the username, `cloudera` for the password, then click `Continue`
+1. The `Import KDC Account Manager Credentials Command` will run for a bit and then should finish successfully, click `Continue`
+1. On the `Kerberos Principal` page, leave the default values and click `Continue`
+1. On the `Configure Ports` page, leave the default values and check the box for `Yes, I am ready to restart the cluster now`, then click `Continue`
+1. Wait for the steps to complete
+1. Test Kerberos by attaching to the QuickStart VM container, or using `docker exec -ti`:
+  - `kinit hdfs@CLOUDERA`
+  - `hadoop fs -mkdir /eraseme`
+  - `hadoop fs -rmdir /eraseme`
+  - `kdestroy`
+
 ## Troubleshooting
 ### Host Health issues
   - `ntp` may not be started, or may not be set to start at boot.

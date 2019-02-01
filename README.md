@@ -61,7 +61,7 @@ In summary, these instructions can be followed to enable Kerberos on the QuickSt
 1. On the `Kerberos Principal` page, leave the default values and click `Continue`
 1. On the `Configure Ports` page, leave the default values and check the box for `Yes, I am ready to restart the cluster now`, then click `Continue`
 1. Wait for the steps to complete
-1. Test Kerberos by attaching to the QuickStart VM container, or using `docker exec -ti`:
+1. Test Kerberos by attaching to the QuickStart VM container, or using `docker exec -ti quickstart.cloudera bash`:
   - `kinit hdfs@CLOUDERA`
   - `hadoop fs -mkdir /eraseme`
   - `hadoop fs -rmdir /eraseme`

@@ -51,9 +51,6 @@ In summary, these instructions can be followed to enable Kerberos on the QuickSt
 Update the `Database Connection URL` property to: `jdbc:impala://quickstart.cloudera:21050/;AuthMech=1;KrbRealm=CLOUDERA;KrbHostFQDN=quickstart.cloudera;KrbServiceName=impala`
 
 ## Troubleshooting
-### Host Health issues
-- `ntp` may not be started, or may not be set to start at boot.
-  - `docker exec quickstart.cloudera service ntpd restart`
 ### Kerberos Issues
 - `krb5kdc` may not be running
   - `docker exec quickstart.cloudera service krb5kdc restart`
@@ -62,10 +59,3 @@ Update the `Database Connection URL` property to: `jdbc:impala://quickstart.clou
 - Client configurations may need to be redeployed once krb5kdc, and at least Zookeeper is succesfully able to be started.
 ### QuickStart VM Kerberos wizard leaves cluster in inoperable state
 - The Kerberos wizard requires that services be installed from parcels, rather than packages.  The QuickStart VM 5.13 (at least for the Docker image) has components installed as packages.  Downloading and activating the 'cdh' parcel should resolve this issue.
-### Docker For Mac
-- Several ports should be added to the `docker run` command when starting the QuickStart container.  More information about ports used by Cloudera QuickStart can be found at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/cm_ig_ports.html
-  - `-p 7051:7051` (Kudu Master)
-  - `-p 7180:7180` (Cloudera Manager UI)
-  - `-p 21050:21050` (Impala Daemon Frontend)
-  - `-p 50070:50070` (HDFS HTTP NameNode)
-  - TBD

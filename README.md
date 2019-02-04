@@ -53,14 +53,6 @@ Please see [Enabling Kerberos on the QuickStart VM](https://github.com/jtstorck/
 ### Host Health issues
 - `ntp` may not be started, or may not be set to start at boot.
   - `docker exec quickstart.cloudera service ntpd restart`
-### Kerberos Issues
-- `krb5kdc` may not be running
-  - `docker exec quickstart.cloudera service krb5kdc restart`
-- Inability to authenticate with KDC due to supported encryption algorithms
-  - Make sure the JCE Unlimited Strength polices are in place for the Java 7 JRE used by the QuickStart VM: `/usr/java/jdk1.7.0_67-cloudera/jre/lib/security`
-- Client configurations may need to be redeployed once krb5kdc, and at least Zookeeper is succesfully able to be started.
-### QuickStart VM Kerberos wizard leaves cluster in inoperable state
-- The Kerberos wizard requires that services be installed from parcels, rather than packages.  The QuickStart VM 5.13 (at least for the Docker image) has components installed as packages.  Downloading and activating the 'cdh' parcel should resolve this issue.
 ### Docker For Mac
 - Several ports should be added to the `docker run` command when starting the QuickStart container.  More information about ports used by Cloudera QuickStart can be found at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/cm_ig_ports.html
   - `-p 7051:7051` (Kudu Master)
@@ -68,5 +60,3 @@ Please see [Enabling Kerberos on the QuickStart VM](https://github.com/jtstorck/
   - `-p 21050:21050` (Impala Daemon Frontend)
   - `-p 50070:50070` (HDFS HTTP NameNode)
   - TBD
-## TODO
-- Provide examples that integrate with a kerberized Impala

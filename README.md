@@ -43,6 +43,8 @@ Import template `nifi-impala-integration.xml` into NiFi, which will create a pro
 1. Go into the `NiFi Impala Integration` process group.
 1. Right click on the canvas, and update the `hadoop-conf` variable with the path to the directory containing the HDFS client configs.
 
+---
+
 ## Enabling Kerberos on the QuickStart VM
 ### Update the QuickStart VM
 A blog detailing the setup is available at: https://blog.cloudera.com/blog/2015/03/how-to-quickly-configure-kerberos-for-your-apache-hadoop-cluster/  
@@ -71,18 +73,26 @@ In summary, these instructions can be followed to enable Kerberos on the QuickSt
    - `hadoop fs -rmdir /eraseme`
    - `kdestroy`
     
-### Configure NiFi to use the KDC installed on the QuickStart VM
+### Copy `cloudera` Keytab and krb5.conf to the NiFi host
 1. Export the cloudera principal's keytab from quickstart.cloudera kdc 
    - `xst -k /root/cloudera.keytab cloudera@CLOUDERA`
 1. Copy `/root/cloudera.keytab` from the QuickStart VM to the host path `/tmp/cloudera.keytab`
 1. Copy `/etc/krb5.conf` from the QuickStart VM to the host path `/tmp/krb5.conf`
+
+### Configure NiFi to use the KDC installed on the QuickStart VM
 1. Set the `nifi.kerberos.krb5.file` property in nifi.properties to `/tmp/krb5.conf`
 1. Download HDFS client configs after kerberizing, as defined in [Download the HDFS client configs](README.md#Download-the-HDFS-client-configs). 
+1. Restart NiFi
+1. Verify the `hadoop-conf` variable in the `NiFi Impala Integration` process group is set to the path to the directory containing the kerberos-enabled HDFS client configs. 
+1. Modify the `Impala JDBC` controller service configuration to use a `KeytabCredentialsService`
+   - `Kerberos Principal` set to `cloudera@CLOUDERA`
+   - `Kerberos Keytab` set to `/tmp/cloudera.keytab`
+1. Enable the `Impala JDBC` and `KeytabCredentialService` controller services.
+
+### Set permissions on HDFS directory `/tmp/randomuser`
 1. Set the permissions on the HDFS directory storing the Randomuser.me data:
    - `kinit hdfs@CLOUDERA`
    - `hdfs dfs -chmod a+w /tmp/randomuser`
-1. Restart NiFi
-1. Verify the `hadoop-conf` variable in the `NiFi Impala Integration` process group is set to the path to the directory containing the kerberos-enabled HDFS client configs. 
 
 ### Update the `Impala JDBC` DBCPConnectionPool controller service config
 Update the `Database Connection URL` property to: `jdbc:impala://quickstart.cloudera:21050/;AuthMech=1;KrbRealm=CLOUDERA;KrbHostFQDN=quickstart.cloudera;KrbServiceName=impala`

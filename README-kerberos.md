@@ -69,5 +69,3 @@ Update the `Database Connection URL` property to: `jdbc:impala://quickstart.clou
   - `-p 21050:21050` (Impala Daemon Frontend)
   - `-p 50070:50070` (HDFS HTTP NameNode)
   - TBD
-## TODO
-- Provide examples that integrate with a kerberized Impala

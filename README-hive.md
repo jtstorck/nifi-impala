@@ -16,6 +16,7 @@ The "Randomuser Hive 1.1" process group contains a `Hive_1_1ConnectionPool` cont
 ### Enable Kerberos on the QuickStart VM
 Instructions for enabling Kerberos on the QuickStart VM are available here: [Enabling Kerberos on the QuickStart VM](https://github.com/jtstorck/nifi-impala/blob/master/README-kerberos.md#enabling-kerberos-on-the-quickstart-vm)
 ### Enable the `Hive_1_1ConnectionPool` controller service
-In the `NiFi Impala Integration` process group, open the `Configure` dialog.
-Enable the `Hive_1_1ConnectionPool` service
-  - The `Database Connection URL` property is set to `jdbc:hive2://quickstart.cloudera:10000/default;principal=hive/_HOST@CLOUDERA.COM` by default.
+1. In the `NiFi Impala Integration` process group, open the `Configure` dialog.
+1. Enable the `KeytabCredentialsService` controller service
+1. Enable the `Hive_1_1ConnectionPool` controller service
+   - The `Database Connection URL` property is set to `jdbc:hive2://quickstart.cloudera:10000/default;principal=hive/_HOST@CLOUDERA.COM` by default.

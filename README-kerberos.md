@@ -37,7 +37,8 @@ In summary, these instructions can be followed to enable Kerberos on the QuickSt
 1. Download HDFS client configs after kerberizing, as defined in [Download the HDFS client configs](README.md#Download-the-HDFS-client-configs). 
 1. Restart NiFi
 1. Verify the `hadoop-conf` variable in the `NiFi Impala Integration` process group is set to the path to the directory containing the kerberos-enabled HDFS client configs. 
-1. Modify the `Impala JDBC` controller service configuration to use a `KeytabCredentialsService`
+1. Modify the `Impala JDBC` controller service configuration to use the `KeytabCredentialsService`
+   - Verify the config below is set on the `KeytabCredentialsService`.  If one does not exist, create it with the following settings
    - `Kerberos Principal` set to `cloudera@CLOUDERA`
    - `Kerberos Keytab` set to `/tmp/cloudera.keytab`
 1. Enable the `Impala JDBC` and `KeytabCredentialService` controller services.

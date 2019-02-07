@@ -49,6 +49,10 @@ Please see [Enabling Kerberos on the QuickStart VM](https://github.com/jtstorck/
 
 ---
 
+Please see [README-hive.md](https://github.com/jtstorck/nifi-impala/blob/master/README-hive.md) for instructions for using Hive 1.1 with NiFi.
+
+---
+
 ## Troubleshooting
 ### Host Health issues
 - `ntp` may not be started, or may not be set to start at boot.

@@ -557,9 +557,11 @@
                         </entry>
                         <entry>
                             <key>hive-max-wait-time</key>
+                            <value>500 millis</value>
                         </entry>
                         <entry>
                             <key>hive-max-total-connections</key>
+                            <value>8</value>
                         </entry>
                         <entry>
                             <key>Validation-query</key>
@@ -2498,7 +2500,7 @@
     </entry>
     <entry>
         <key>Replacement Value</key>
-        <value>LOAD DATA INPATH '${absolute.hdfs.path}/${filename.hdfs}' OVERWRITE INTO TABLE randomuser_csv_hive</value>
+        <value>LOAD DATA INPATH '${absolute.hdfs.path}/${filename.hdfs}' INTO TABLE randomuser_csv_hive</value>
     </entry>
     <entry>
         <key>Character Set</key>
@@ -7383,5 +7385,5 @@
             </variables>
         </processGroups>
     </snippet>
-    <timestamp>02/06/2019 22:33:02 EST</timestamp>
+    <timestamp>02/07/2019 13:32:01 EST</timestamp>
 </template>

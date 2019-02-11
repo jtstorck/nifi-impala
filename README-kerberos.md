@@ -48,8 +48,11 @@ In summary, these instructions can be followed to enable Kerberos on the QuickSt
    - `kinit hdfs@CLOUDERA`
    - `hdfs dfs -chmod a+w /tmp/randomuser`
 
-### Update the `Impala JDBC` DBCPConnectionPool controller service config
-Update the `Database Connection URL` property to: `jdbc:impala://quickstart.cloudera:21050/;AuthMech=1;KrbRealm=CLOUDERA;KrbHostFQDN=quickstart.cloudera;KrbServiceName=impala`
+### Update component configs
+1. `Impala JDBC` DBCPConnectionPool controller service
+   * Update the `Database Connection URL` property to: `jdbc:impala://quickstart.cloudera:21050/;AuthMech=1;KrbRealm=CLOUDERA;KrbHostFQDN=quickstart.cloudera;KrbServiceName=impala`
+   * Update the `Kerberos Credentials Service` property to use `KeytabCredentialsService`
+1. Update the `PutKudu` config to use the `KerberosCredentialsService` controller service
 
 ## Troubleshooting
 ### Kerberos Issues

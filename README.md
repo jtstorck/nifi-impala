@@ -33,7 +33,7 @@ Examples for integrating NiFi and Impala
 
 ## Example Flow
 Import template `nifi-impala-integration.xml` into NiFi, which will create a process group called `NiFi Impala Integration`.  Within that process group are several process groups that demonstrate various examples of retrieving data from external sources and creating tables in Impala to make that data queryable.
-- Create and start a DistributedMapCacheServer controller service, using the property defaults.
+- Create and enable a DistributedMapCacheServer controller service, using the property defaults.
   - This is due to https://issues.apache.org/jira/browse/NIFI-1293, controller services and reporting tasks cannot be exported to a flow because no components explicitly reference them.
 - Enable all controller services from the `NiFi Impala Integration` process group's `Configuration`, under `Controller Services`.
 

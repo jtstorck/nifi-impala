@@ -60,9 +60,14 @@ Please see [README-hive.md](https://github.com/jtstorck/nifi-impala/blob/master/
 - `ntp` may not be started, or may not be set to start at boot.
   - `docker exec quickstart.cloudera service ntpd restart`
 ### Docker For Mac
+- References to the hostname `quickstart.cloudera` in the `NiFi Impala Integration` template will need to be replaced with `localhost`.
 - Several ports should be added to the `docker run` command when starting the QuickStart container.  More information about ports used by Cloudera QuickStart can be found at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/cm_ig_ports.html
   - `-p 7051:7051` (Kudu Master)
   - `-p 7180:7180` (Cloudera Manager UI)
   - `-p 21050:21050` (Impala Daemon Frontend)
   - `-p 50070:50070` (HDFS HTTP NameNode)
   - TBD
+
+## TODO
+- Set up a proxy container to allow resolution to the `quickstart.cloudera` container
+- Scripts to speed up configuration, starting, stopping the containers.

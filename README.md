@@ -60,13 +60,20 @@ Please see [README-hive.md](https://github.com/jtstorck/nifi-impala/blob/master/
 - `ntp` may not be started, or may not be set to start at boot.
   - `docker exec quickstart.cloudera service ntpd restart`
 ### Docker For Mac
-- References to the hostname `quickstart.cloudera` in the `NiFi Impala Integration` template will need to be replaced with `localhost`.
-- Several ports should be added to the `docker run` command when starting the QuickStart container.  More information about ports used by Cloudera QuickStart can be found at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/cm_ig_ports.html
-  - `-p 7051:7051` (Kudu Master)
-  - `-p 7180:7180` (Cloudera Manager UI)
-  - `-p 21050:21050` (Impala Daemon Frontend)
-  - `-p 50070:50070` (HDFS HTTP NameNode)
-  - TBD
+- It may be easier to run NiFi on the QuickStart VM to avoid needing to map ports to localhost.
+  - Docker has an internal SOCKS proxy (an experimental feature) as of 18.03.0-ce-rc2-mac56 (23206) that can be used to allow access to the container by its name
+    - Portmapping in the `docker run` command isn't needed make HTTP ports available to localhost
+    - This [github/docker/for-mac issue comment](https://github.com/docker/for-mac/issues/2670#issuecomment-372365274) provides instructions for setting up the experimental SOCKS proxy feature
+    - Rather than adding the SOCKS proxy at the OS level, an alternate web browser from the one typically used can be configured with the SOCKS proxy settings.
+    - UIs for Cloudera Manager, NiFi, etc, will be available at `http://quickstart.cloudera:[PORT]`
+- If NiFi is not running on the QuickStart VM
+  - References to the hostname `quickstart.cloudera` in the `NiFi Impala Integration` template will need to be replaced with `localhost`.
+  - Several ports should be added to the `docker run` command when starting the QuickStart container.  More information about ports used by Cloudera QuickStart can be found at: https://www.cloudera.com/documentation/enterprise/5-13-x/topics/cm_ig_ports.html
+    - `-p 7051:7051` (Kudu Master)
+    - `-p 7180:7180` (Cloudera Manager UI)
+    - `-p 21050:21050` (Impala Daemon Frontend)
+    - `-p 50070:50070` (HDFS HTTP NameNode)
+    - TBD
 
 ## TODO
 - Set up a proxy container to allow resolution to the `quickstart.cloudera` container
